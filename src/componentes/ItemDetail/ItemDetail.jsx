@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ producto }) => {
   const [toggle, setToggle] = useState(false);
+  const { añadirProductoAlCarrito } = useContext(CartContext)
 
   const añadirProducto = (contador) => {
     setToggle(true);
     const productoCarrito = { ...producto, cantidad: contador };
-    console.log(productoCarrito);
+    añadirProductoAlCarrito(productoCarrito)
   };
 
   return (

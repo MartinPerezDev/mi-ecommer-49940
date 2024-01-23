@@ -1,9 +1,15 @@
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import { Link } from "react-router-dom"
+
 const CartWidget = () => {
+  const { cantidadTotal } = useContext(CartContext)
+
   return (
-    <div id="cartwidget">
+    <Link to="/carrito" id="cartwidget">
       <img src="/img/carrito.png" alt="icono de carrito" />
-      <p>1</p>
-    </div>
+      <p> {cantidadTotal()} </p>
+    </Link>
   )
 }
 
