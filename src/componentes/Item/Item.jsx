@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import "./Item.css";
 
-const Item = ({ producto }) => {
+// eslint-disable-next-line react/display-name
+const Item = React.memo(({ producto }) => {
   const [agrandar, setAgrandar] = useState(false);
 
   const handleMouseOver = () => {
@@ -25,6 +26,8 @@ const Item = ({ producto }) => {
     transition: 'transform 0.3s ease-in-out'
   }
 
+  console.log("Re-render de: ", producto.nombre)
+
   return (
     <div
       className="item"
@@ -40,5 +43,6 @@ const Item = ({ producto }) => {
       </Link>
     </div>
   );
-};
+}, (propsAntiguas, propsNuevas)=> JSON.stringify(propsAntiguas.producto) === JSON.stringify(propsNuevas.producto) )
+
 export default Item;
