@@ -3,26 +3,38 @@ import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
+import "./ItemDetail.css";
+
 const ItemDetail = ({ producto }) => {
   const [toggle, setToggle] = useState(false);
-  const { añadirProductoAlCarrito } = useContext(CartContext)
+  const { añadirProductoAlCarrito } = useContext(CartContext);
 
   const añadirProducto = (contador) => {
     setToggle(true);
     const productoCarrito = { ...producto, cantidad: contador };
-    añadirProductoAlCarrito(productoCarrito)
+    añadirProductoAlCarrito(productoCarrito);
   };
 
   return (
-    <div>
-      <img src={producto.imagen} alt={producto.nombre} />
-      <p> {producto.nombre} </p>
-      <p> ${producto.precio} </p>
-      {toggle ? (
-        <Link to="/carrito">Ir al carrito</Link>
-      ) : (
-        <ItemCount stock={producto.stock} añadirProducto={añadirProducto} />
-      )}
+    <div className="item-detail">
+      <img className="imagen" src={producto.imagen} alt={producto.nombre} />
+      <div className="texto">
+        <h2>{producto.nombre}</h2>
+        <p>{producto.descripcion}</p>
+        <p>${producto.precio}</p>
+        {toggle ? (
+          <>
+            <Link className="button-terminar" to="/carrito">
+              Ir al carrito
+            </Link>
+            <Link className="button-terminar" to="/">
+              Seguir comprando
+            </Link>
+          </>
+        ) : (
+          <ItemCount stock={producto.stock} añadirProducto={añadirProducto} />
+        )}
+      </div>
     </div>
   );
 };

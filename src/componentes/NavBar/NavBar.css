@@ -52,6 +52,7 @@
   align-items: center;
   color: white;
   margin: 0 40px;
+  text-decoration: none;
 }
 
 #cartwidget:hover{
