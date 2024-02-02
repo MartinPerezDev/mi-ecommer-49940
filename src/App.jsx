@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Carrito from "./componentes/Carrito/Carrito";
 import { CartProvider } from "./context/CartContext";
 import RenderingCondicional from "./componentes/Ejemplos/RenderingCondicional/RenderingCondicional";
+import Checkout from "./componentes/Checkout/Checkout";
 
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/detalle/:idProducto" element={<ItemDetailContainer />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/ejemplos" element={<RenderingCondicional />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={ <div>Pagina no encontrada</div> } />
         </Routes>
       </CartProvider>
