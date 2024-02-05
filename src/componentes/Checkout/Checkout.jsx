@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
+
 import FormularioCheckout from "./FormularioCheckout";
 import { CartContext } from "../../context/CartContext";
 import { collection, addDoc } from "firebase/firestore";
 import db from "../../db/db";
+import { Link } from "react-router-dom";
 
 import "./Checkout.css";
-import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const [datosForm, setDatosForm] = useState({
@@ -31,7 +32,7 @@ const Checkout = () => {
       estado: false,
       total: precioTotal(),
     };
-    console.log(datosForm)
+
     //comparamos que los email sean iguales
     if(datosForm.email !== datosForm.repetirEmail){
       alert("Los campos de email deben ser iguales")

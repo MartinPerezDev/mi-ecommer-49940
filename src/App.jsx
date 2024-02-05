@@ -4,7 +4,6 @@ import ItemDetailContainer from "./componentes/ItemDetailContainer/ItemDetailCon
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Carrito from "./componentes/Carrito/Carrito";
 import { CartProvider } from "./context/CartContext";
-import RenderingCondicional from "./componentes/Ejemplos/RenderingCondicional/RenderingCondicional";
 import Checkout from "./componentes/Checkout/Checkout";
 
 import "./App.css";
@@ -16,13 +15,21 @@ function App() {
         <NavBar />
 
         <Routes>
-          <Route path="/" element={<ItemListContainer saludo="Bienvenidos a Sony" />} />
-          <Route path="/categoria/:categoria" element={<ItemListContainer saludo="Bienvenidos a Sony" />} />
-          <Route path="/detalle/:idProducto" element={<ItemDetailContainer />} />
+          <Route
+            path="/"
+            element={<ItemListContainer saludo="Bienvenidos a Sony" />}
+          />
+          <Route
+            path="/categoria/:categoria"
+            element={<ItemListContainer saludo="Bienvenidos a Sony" />}
+          />
+          <Route
+            path="/detalle/:idProducto"
+            element={<ItemDetailContainer />}
+          />
           <Route path="/carrito" element={<Carrito />} />
-          <Route path="/ejemplos" element={<RenderingCondicional />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="*" element={ <div>Pagina no encontrada</div> } />
+          <Route path="*" element={<div>Pagina no encontrada</div>} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
