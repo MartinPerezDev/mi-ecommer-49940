@@ -4,11 +4,15 @@ import { CartContext } from "../../context/CartContext";
 import { collection, addDoc } from "firebase/firestore";
 import db from "../../db/db";
 
+import "./Checkout.css";
+import { Link } from "react-router-dom";
+
 const Checkout = () => {
   const [datosForm, setDatosForm] = useState({
     nombre: "",
     telefono: "",
     email: "",
+    repetirEmail: ""
   });
   const { carrito, precioTotal } = useContext(CartContext);
   const [idOrden, setIdOrden] = useState(null);
@@ -23,8 +27,17 @@ const Checkout = () => {
     const orden = {
       comprador: { ...datosForm },
       productos: [...carrito],
+      fecha: String(Date.now()),
+      estado: false,
       total: precioTotal(),
     };
+    console.log(datosForm)
+    //comparamos que los email sean iguales
+    if(datosForm.email !== datosForm.repetirEmail){
+      alert("Los campos de email deben ser iguales")
+      return
+    }
+
     //subimos la orden a firebase
     const ordenesRef = collection(db, "ordenes");
     addDoc(ordenesRef, orden)
@@ -43,11 +56,14 @@ const Checkout = () => {
   };
 
   return (
-    <div>
+    <div className="checkout">
       {idOrden ? (
-        <div>
-          <h2>Orden generada con exito!!!</h2>
-          <p> guarde el id de su orden: {idOrden} </p>
+        <div className="orden">
+          <h2>Orden Generada correctamente!!</h2>
+          <p>N° de orden: {idOrden} </p>
+          <Link className="boton-orden" to="/">
+            Ver mas productos
+          </Link>
         </div>
       ) : (
         <FormularioCheckout
